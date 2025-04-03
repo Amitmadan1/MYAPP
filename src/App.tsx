@@ -1,37 +1,16 @@
-import 'react-native-gesture-handler';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { MMKV } from 'react-native-mmkv';
 
-import { ThemeProvider } from '@/theme';
-import ApplicationNavigator from '@/navigation/Application';
+import AppNavigator from './navigation/Application';
+import { CartProvider } from './screens/context/cartcontext';
 
-import '@/translations';
-
-export const queryClient = new QueryClient({
-  defaultOptions: {
-    mutations: {
-      retry: false,
-    },
-    queries: {
-      retry: false,
-    },
-  },
-});
-
-export const storage = new MMKV();
-
-function App() {
-  return (
-    <GestureHandlerRootView>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider storage={storage}>
-          <ApplicationNavigator />
-        </ThemeProvider>
-      </QueryClientProvider>
-    </GestureHandlerRootView>
-  );
-}
+const App = () => (
+  <CartProvider>
+    <NavigationContainer>
+      <AppNavigator />
+    </NavigationContainer>
+  </CartProvider>
+);
 
 export default App;

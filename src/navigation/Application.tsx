@@ -1,29 +1,43 @@
-import type { RootStackParamList } from '@/navigation/types';
-
-import { NavigationContainer } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../firebase/firebaseConfig';
 
-import { useTheme } from '@/theme';
-import { Paths } from '@/navigation/paths';
+import ProductDetailScreen from '../screens/ProductDetailScreen';
+import CartScreen from '../screens/CartScreen';
+import LoginScreen from '../screens/LoginScreen';
+import RegisterScreen from '../screens/RegisterScreen';
+import ProductListScreen from '@/screens/ProductListScreent';
 
-import { Example, Startup } from '@/screens';
+const Stack = createStackNavigator();
 
-const Stack = createStackNavigator<RootStackParamList>();
+const AppNavigator = () => {
+  const [user, setUser] = useState(null);
 
-function ApplicationNavigator() {
-  const { navigationTheme, variant } = useTheme();
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, setUser);
+    return unsubscribe;
+  }, []);
+
+
+  
 
   return (
-    <SafeAreaProvider>
-      <NavigationContainer theme={navigationTheme}>
-        <Stack.Navigator key={variant} screenOptions={{ headerShown: false }}>
-          <Stack.Screen component={Startup} name={Paths.Startup} />
-          <Stack.Screen component={Example} name={Paths.Example} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {user ? (
+        <>
+          <Stack.Screen name="Products" component={ProductListScreen} />
+          <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
+          <Stack.Screen name="Cart" component={CartScreen} />
+        </>
+      ) : (
+        <>
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Register" component={RegisterScreen} />
+        </>
+      )}
+    </Stack.Navigator>
   );
-}
+};
 
-export default ApplicationNavigator;
+export default AppNavigator;

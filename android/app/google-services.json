@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "298440808109",
+    "project_id": "smart-e-commerce-f4f60",
+    "storage_bucket": "smart-e-commerce-f4f60.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:298440808109:android:700d9a00ee9de048ba5824",
+        "android_client_info": {
+          "package_name": "com.myapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "298440808109-g6afki00kikcgofdqsoo2u8n3ov49rh2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC97v06Z-PA948toWXxuspjlZ3JfBeBIJ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "298440808109-g6afki00kikcgofdqsoo2u8n3ov49rh2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
